@@ -1,15 +1,23 @@
 from tensorflow import keras 
 import numpy as np
-import pandas as pd
+from google.cloud import storage
+import os
+from flask import request
+from app.load_dl_model import dog_names, finetuned_Resnet50_model, ResNet50_model
+from app import response
 
-# mengambil data label nama ras anjing
-dog_names = pd.read_csv('dog_labels.csv')
-dog_names = dog_names['0'].tolist()
+GCS_ASSETS_BUCKET = 'gs://dog-breed-classification-photo'
 
-finetuned_Resnet50_model = keras.models.load_model('saved_models/weights.best.hdf5')
-
-# mendefinisikan model resnet50
-ResNet50_model = keras.applications.ResNet50(weights='imagenet')
+def gcs_upload_image(filename: str):
+    storage_client: storage.Client = storage.Client()
+    bucket: storage.Bucket = storage_client.bucket(GCS_ASSETS_BUCKET)
+    blob: storage.Blob = bucket.blob(filename.split("/")[-1])
+    blob.upload_from_filename(filename)
+    blob.make_public()
+    public_url: str = blob.public_url
+    print(f"Image uploaded to {public_url}")
+    os.remove(filename)
+    return public_url
 
 def path_to_tensor(img_path):
     # memuat gambar rgb sebagai PIL.Image.Image type
@@ -45,13 +53,11 @@ def Resnet50_predict_breed(img_path):
     return dog_breed, confidence_value
 
 def api_predict_response(dog_breed, confidence, message):
-    response = []
     resp = {}
     resp["dog_breed"] = dog_breed
     resp["confidence"] = f"{confidence} %"
     resp["response_message"] = message
-    response.append(resp)
-    return response
+    return resp
 
 def breed_detector(img_path):
     prediction_result = Resnet50_predict_breed(img_path)
@@ -64,3 +70,16 @@ def breed_detector(img_path):
     else:
         message = 'Hmmm... sepertinya itu bukan foto anjing deh, coba kirim foto yang berisi anjing!'
         return api_predict_response(None, 0, message)
+
+def post_predict_image():
+    file = request.files.get('image')
+    if not file:
+        return response.badRequest(values=[], message="Image is required")
+    try:
+        tmp_file = f'temp_foto/{file.filename}'
+        file.save(tmp_file)
+        prediction = breed_detector(tmp_file)
+        os.remove(tmp_file)
+        return response.success(values=prediction, message="Success")
+    except Exception as e:
+        return response.badRequest(values=[], message=e)
