@@ -1,7 +1,7 @@
 # memasukan liibrary yang diperlukan
 from flask import Flask
 from config import Config
-# from flask_sqlalchemy import SQLAlchemy
+from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 from flask_swagger_ui import get_swaggerui_blueprint
 import os
@@ -26,10 +26,11 @@ app.register_blueprint(swaggerui_blueprint)
 
 app.config.from_object(Config)
 
-# db = SQLAlchemy(app)
+db = SQLAlchemy(app)
 
-# migrate = Migrate(app, db)
+migrate = Migrate(app, db)
 
+from app.model import dog_breed
 from app import routes
 
 #kembali ke halaman awal
