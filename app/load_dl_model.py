@@ -3,7 +3,7 @@ import numpy as np
 import pandas as pd
 
 # mengambil data label nama ras anjing
-dog_names = pd.read_csv('dog_labels.csv')
+dog_names = pd.read_csv('database/dog_labels.csv')
 dog_names = dog_names['0'].tolist()
 
 finetuned_Resnet50_model = keras.models.load_model('saved_models/weights.best.hdf5')

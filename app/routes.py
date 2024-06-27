@@ -1,10 +1,5 @@
-# memasukan library yang dibutuhkan dalam route
-from flask import request, jsonify
-
-import json
-import os
 from app import app
-from app.controller import PredictController
+from app.controller import PredictController, DogBreedController
 
 api_prefix = '/api/v1/'
 
@@ -16,3 +11,7 @@ def helloWorld():
 @app.route(api_prefix + 'predict', methods=['POST'])
 def predict():
   return PredictController.post_predict_image()
+
+@app.route(api_prefix + 'dogs', methods=['GET'])
+def dog_breed():
+  return DogBreedController.get_breed_data()
