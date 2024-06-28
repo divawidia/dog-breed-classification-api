@@ -33,7 +33,7 @@
           "required": true,
           "description": "Upload image to classify dog breed",
           "content": {
-            "application/x-www-form-urlencoded": {
+            "multipart/form-data": {
               "schema": {
                 "type": "object",
                 "properties": {
@@ -43,7 +43,7 @@
                   }
                 },
                 "required": [
-                  "msg"
+                  "image"
                 ]
               }
             }
@@ -55,7 +55,7 @@
             "content": {
               "application/json": {
                 "examples": {
-                  "Create message to chatbot": {
+                  "Predict image": {
                     "value": "{\n    \"data\": {\n        \"confidence\": \"78.76 %\",\n        \"dog_breed\": \"Golden Retriever\",\n        \"response_message\": \"Aku tebak ini 78.76% anjing ras Golden Retriever\"\n    },\n    \"message\": \"Success\"\n}"
                   }
                 }
@@ -103,7 +103,7 @@
                   "$ref": "#/components/schemas/DogBreed"
                 },
                 "examples": {
-                  "Retrieve all guest user's message": {
+                  "Retrieve specific dog breed details": {
                     "value": "{\n  \"data\": {\n      \"breed\": \"Golden Retriever\",\n      \"demeanor_category\": \"Ramah\",\n      \"demeanor_value\": 0.8,\n      \"description\": \"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.\",\n      \"energy_level_category\": \"Membutuhkan Banyak Aktivitas\",\n      \"energy_level_value\": 1.0,\n      \"grooming_frequency_category\": \"Menyikat Gigi Mingguan\",\n      \"grooming_frequency_value\": 0.4,\n      \"group\": \"Sporting Group\",\n      \"max_expectancy\": 12.0,\n      \"max_height\": 60.96,\n      \"max_weight\": 34.01942775,\n      \"min_expectancy\": 10.0,\n      \"min_height\": 54.61,\n      \"min_weight\": 24.947580350000003,\n      \"popularity\": \"3\",\n      \"shedding_category\": \"Musiman\",\n      \"shedding_value\": 0.6,\n      \"temperament\": \"Ramah, Cerdas, Berbakti\",\n      \"trainability_category\": \"Ingin menyenangkan\",\n      \"trainability_value\": 1.0\n  },\n  \"message\": \"Success\"\n}"
                   }
                 }

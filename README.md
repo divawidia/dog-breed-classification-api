@@ -1,4 +1,4 @@
-# API Teman Ngorte Chatbot App
+# API Dog Breed Classifier App
 Backend app to deploy and classify dog breed from uploaded image, contains REST API for predict/classify dog breed, and retrieve dog breed detail data.
 This backend app (include deployment of deep learning model) was created using Flask framework.
 For more detailed app description and deep learning model used for chatbot, can be seen [here](https://github.com/divawidia/Dog-Breed-Classification-Telegram-Bot)
