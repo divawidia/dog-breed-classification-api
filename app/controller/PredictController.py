@@ -1,23 +1,9 @@
 from tensorflow import keras 
 import numpy as np
-from google.cloud import storage
 import os
 from flask import request
 from app.load_dl_model import dog_names, finetuned_Resnet50_model, ResNet50_model
 from app import response
-
-GCS_ASSETS_BUCKET = 'gs://dog-breed-classification-photo'
-
-def gcs_upload_image(filename: str):
-    storage_client: storage.Client = storage.Client()
-    bucket: storage.Bucket = storage_client.bucket(GCS_ASSETS_BUCKET)
-    blob: storage.Blob = bucket.blob(filename.split("/")[-1])
-    blob.upload_from_filename(filename)
-    blob.make_public()
-    public_url: str = blob.public_url
-    print(f"Image uploaded to {public_url}")
-    os.remove(filename)
-    return public_url
 
 def path_to_tensor(img_path):
     # memuat gambar rgb sebagai PIL.Image.Image type

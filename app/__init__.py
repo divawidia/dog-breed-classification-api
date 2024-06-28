@@ -8,7 +8,7 @@ app = Flask(__name__)
 SWAGGER_URL = '/api/v1/docs'  # URL for exposing Swagger UI (without trailing '/')
 
 # API_URL = 'http://127.0.0.1:5000/swagger.json'  # Our API url (can of course be a local resource)
-API_URL = 'https://teman-ngorte-api-jum5dt3leq-et.a.run.app/swagger.json'
+API_URL = 'https://dog-breed-classifier-api-7zz24sawna-et.a.run.app/swagger.json'
 
 # Call factory function to create our blueprint
 swaggerui_blueprint = get_swaggerui_blueprint(

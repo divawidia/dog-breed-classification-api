@@ -1,18 +1,17 @@
 # API Teman Ngorte Chatbot App
-Teman Ngorte is a website-based application as a medium for expressing users' feelings in order to relieve stress through the chatbot feature. This is a backend app of Teman Ngorte Chatbot, contains REST API for login/register user, login as guest, and message to chatbot, save and retrieve all user's message data.
-The backend app (include deployment of deep learning model) was created using Flask framework.
-For more detailed app description and deep learning model used for chatbot, can be seen [here](https://github.com/DL-Kel2-TemanNgorte)
+Backend app to deploy and classify dog breed from uploaded image, contains REST API for predict/classify dog breed, and retrieve dog breed detail data.
+This backend app (include deployment of deep learning model) was created using Flask framework.
+For more detailed app description and deep learning model used for chatbot, can be seen [here](https://github.com/divawidia/Dog-Breed-Classification-Telegram-Bot)
 
 ## Techstack
 
 <p align="center">
     <a href="https://www.python.org/"><img alt="Python v3.10.x" src="https://img.shields.io/badge/Python-v3.10.x-c2c330?style=for-the-badge&logo=python"></a>
     <a href="https://flask.palletsprojects.com/en/3.0.x/"><img alt="Flask v3.0.x" src="https://img.shields.io/badge/Flask-v3.0.x-7CC8D2?style=for-the-badge&logo=flask"></a>
-    <a href="https://flask-sqlalchemy.palletsprojects.com/en/3.1.x/"><img alt="Flask SQLAlchemy v2.x" src="https://img.shields.io/badge/Flask SQLAlchemy-v3.10.x-CA2727?style=for-the-badge&logo=sqlalchemy"></a>
+    <a href="https://www.mongodb.com/"><img alt="MongoDB v7.0.11" src="https://img.shields.io/badge/MongoDB-v7.0.11-00684A?style=for-the-badge&logo=mongodb"></a>
     <a href="https://gunicorn.org/"><img alt="Gunicorn 22.0" src="https://img.shields.io/badge/Gunicorn-v22.0-469745?style=for-the-badge&logo=gunicorn"></a>
-    <a href="https://www.mysql.com/">
-        <img src="https://img.shields.io/badge/MySQL-v8.0-3E6E93?style=for-the-badge&logo=mysql" alt="MySQL 8.0">
-    </a>
+    <br/>
+    <a href="https://www.tensorflow.org/"><img alt="Tensorflow 2.16.0" src="https://img.shields.io/badge/Tensorflow-v2.16.0-FF8500?style=for-the-badge&logo=tensorflow"></a>
     <br/>
     <a href="https://cloud.google.com/?hl=en">
         <img src="https://img.shields.io/badge/Google Cloud Platform-FFFFFF?style=for-the-badge&logo=googlecloud" alt="Google Cloud Platform">
@@ -39,17 +38,15 @@ For more detailed app description and deep learning model used for chatbot, can 
 </p>
 
 ## Features
-* User authentication (login and register)
-* Guest authentication (login without register)
-* Message to chatbot (you need to login first to use the chatbot)
-* Retrieve all user's message
-* Fine tuned BiLSTM deep learning model for chatbot
+* Classify dog breed by uploading image
+* Using CNN with Resnet50 transfer learning trained on dog breed dataset to classify dog breed
+* Retrieve dog breed detail data based on dog breed name
 
 ## Installation
 1. Clone this repository:
 
 	```
-	$ git clone https://github.com/stefanvdw1/flask-api-template.git
+	$ git clone https://github.com/divawidia/dog-breed-classification-api.git
 	```
 2. Virtual Environment Setup:
     It is preferred to create a virtual environment per project, rather then installing all dependencies of each of your 
@@ -79,18 +76,16 @@ For more detailed app description and deep learning model used for chatbot, can 
 4. Copy the .env.example file and Rename to .env
     After copy and rename the file to .env, fill the required environment variables such as:
     * DB_HOST = 
-    * DB_DATABASE = 
+    * DB_CLUSTER = 
     * DB_USERNAME = 
     * DB_PASSWORD = 
-    * DB_PORT = 
-    * HUGGINGFACE_AUTH =
 5. Set Up the Database
-    First you need to create the database manually in your mysql server/localhost.
-    Match the database name that has been created in the DB_DATABASE variable in .env file with the database created on the MySQL Server/Localhost.
-    Database migrations are handled through Flask's Migrate Package, which provides a wrapper around Alembic. Migrations are done for updating and creating necessary tables/entries in your database. Flask provides a neat way of handling these. The files generate by the migrations should be added to source control.
-    To setup a MySQL database migration, you need to run:
+    First you need to create the cluster manually in your mongodb atlas/localhost.
+    Match the cluster name that has been created in the DB_DATABASE variable in .env file with the database created on the mongodb atlas/localhost.
+    
+    To setup a MongoDB migration, you need to run:
     ```bash
-    flask db upgrade
+    python database/migrate.py
     ```
 6. Running the Application
 
@@ -100,6 +95,12 @@ For more detailed app description and deep learning model used for chatbot, can 
     ```bash
     flask run
     ```
+7. Go to the swagger api documentation
+    Once you have run your flask app , you can go to the swagger api documentation by enter this url:
+
+    ```bash
+    http://127.0.0.1:5000/api/v1/docs
+    ```
 
 ## Deployment
 If you want to deploy this application to GCP Environment, you can follow this [tutorial](https://youtu.be/LRJX8hvQ6oQ?si=ED0mv_e--rZNxlsn)
@@ -107,4 +108,4 @@ If you want to deploy this application to GCP Environment, you can follow this [
 ## API Documentation
 The API documentation of the Teman Ngorte Chatbot application can be seen in the following Swagger API documentation, you can try out the API by clicking the button bellow :
 
-[![View in Swagger](https://jessemillar.github.io/view-in-swagger-button/button.svg)](https://teman-ngorte-api-jum5dt3leq-et.a.run.app/api/v1/docs/)
+[![View in Swagger](https://jessemillar.github.io/view-in-swagger-button/button.svg)](https://dog-breed-classifier-api-7zz24sawna-et.a.run.app/api/v1/docs/)

@@ -7,7 +7,7 @@
   },
   "servers": [
     {
-      "url": "https://teman-ngorte-api-jum5dt3leq-et.a.run.app/api/v1/"
+      "url": "https://dog-breed-classifier-api-7zz24sawna-et.a.run.app/api/v1/"
     }
   ],
   "tags": [

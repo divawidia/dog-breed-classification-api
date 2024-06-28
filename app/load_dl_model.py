@@ -1,5 +1,4 @@
 from tensorflow import keras 
-import numpy as np
 import pandas as pd
 
 # mengambil data label nama ras anjing
