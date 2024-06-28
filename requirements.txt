@@ -2,13 +2,10 @@ pandas==2.2.2
 config
 numpy==1.26.4
 tensorflow==2.16.1
-alembic==1.13.1
 Flask==3.0.3
-Flask_Migrate==4.0.7
-flask_sqlalchemy==3.1.1
 flask_swagger_ui==4.11.1
 gunicorn
-pymysql
 pillow
 python-dotenv
+pymongo==4.8.0
 SQLAlchemy==2.0.30

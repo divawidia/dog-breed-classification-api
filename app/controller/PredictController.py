@@ -73,7 +73,8 @@ def breed_detector(img_path):
 
 def post_predict_image():
     file = request.files.get('image')
-    if not file:
+    extension = file.filename.split(".")[-1] in ("jpg", "jpeg", "png")
+    if not extension:
         return response.badRequest(values=[], message="Image is required")
     try:
         tmp_file = f'temp_foto/{file.filename}'

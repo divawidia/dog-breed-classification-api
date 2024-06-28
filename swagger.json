@@ -1,0 +1,228 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "Dog Breed Classifier API",
+    "description": "Documentation of dog breed classifier app API",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "https://teman-ngorte-api-jum5dt3leq-et.a.run.app/api/v1/"
+    }
+  ],
+  "tags": [
+    {
+      "name": "Dog Breed Predict",
+      "description": "Access to dog breed classifier"
+    },
+    {
+      "name": "Dog Breed Detail",
+      "description": "Access to dog breed detail data"
+    }
+  ],
+  "paths": {
+    "/predict": {
+      "post": {
+        "tags": [
+          "Dog Breed Predict"
+        ],
+        "summary": "Predict dog breed based on uploaded image using deep learning model",
+        "description": "",
+        "operationId": "dogBreedPredictPost",
+        "requestBody": {
+          "required": true,
+          "description": "Upload image to classify dog breed",
+          "content": {
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "image": {
+                    "type": "string",
+                    "format": "binary"
+                  }
+                },
+                "required": [
+                  "msg"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Operation",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "Create message to chatbot": {
+                    "value": "{\n    \"data\": {\n        \"confidence\": \"78.76 %\",\n        \"dog_breed\": \"Golden Retriever\",\n        \"response_message\": \"Aku tebak ini 78.76% anjing ras Golden Retriever\"\n    },\n    \"message\": \"Success\"\n}"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request Operation",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "Create message to chatbot": {
+                    "value": "{\n    \"data\": [],\n    \"message\": \"Image is required\"\n}"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/dogs": {
+      "get": {
+        "tags": [
+          "Dog Breed Detail"
+        ],
+        "description": "Retrieve specific dog breed detail data",
+        "operationId": "dogBreedDetailGet",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "breed",
+            "schema": {
+              "type": "string"
+            },
+            "description": "Name of dog breed"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DogBreed"
+                },
+                "examples": {
+                  "Retrieve all guest user's message": {
+                    "value": "{\n  \"data\": {\n      \"breed\": \"Golden Retriever\",\n      \"demeanor_category\": \"Ramah\",\n      \"demeanor_value\": 0.8,\n      \"description\": \"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.\",\n      \"energy_level_category\": \"Membutuhkan Banyak Aktivitas\",\n      \"energy_level_value\": 1.0,\n      \"grooming_frequency_category\": \"Menyikat Gigi Mingguan\",\n      \"grooming_frequency_value\": 0.4,\n      \"group\": \"Sporting Group\",\n      \"max_expectancy\": 12.0,\n      \"max_height\": 60.96,\n      \"max_weight\": 34.01942775,\n      \"min_expectancy\": 10.0,\n      \"min_height\": 54.61,\n      \"min_weight\": 24.947580350000003,\n      \"popularity\": \"3\",\n      \"shedding_category\": \"Musiman\",\n      \"shedding_value\": 0.6,\n      \"temperament\": \"Ramah, Cerdas, Berbakti\",\n      \"trainability_category\": \"Ingin menyenangkan\",\n      \"trainability_value\": 1.0\n  },\n  \"message\": \"Success\"\n}"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request Operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DogBreed"
+                },
+                "examples": {
+                  "Create message to chatbot": {
+                    "value": "{\n    \"data\": [],\n    \"message\": \"Error Message\"\n}"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "DogBreed": {
+        "type": "object",
+        "properties": {
+          "breed": {
+            "type": "string",
+            "example": "Golden Retriever"
+          },
+          "demeanor_category": {
+            "type": "string",
+            "example": "Ramah"
+          },
+          "demeanor_value": {
+            "type": "number",
+            "example": 0.8
+          },
+          "description": {
+            "type": "string",
+            "example": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
+          },
+          "energy_level_category": {
+            "type": "string",
+            "example": "Membutuhkan Banyak Aktivitas"
+          },
+          "energy_level_value": {
+            "type": "number",
+            "example": 1
+          },
+          "grooming_frequency_category": {
+            "type": "string",
+            "example": "Menyikat Gigi Mingguan"
+          },
+          "grooming_frequency_value": {
+            "type": "number",
+            "example": 0.4
+          },
+          "group": {
+            "type": "string",
+            "example": "Sporting Group"
+          },
+          "max_expectancy": {
+            "type": "number",
+            "example": 12
+          },
+          "max_height": {
+            "type": "number",
+            "example": 60.96
+          },
+          "max_weight": {
+            "type": "number",
+            "example": 34.01942775
+          },
+          "min_expectancy": {
+            "type": "number",
+            "example": 10
+          },
+          "min_height": {
+            "type": "number",
+            "example": 54.61
+          },
+          "min_weight": {
+            "type": "number",
+            "example": 24.947580350000003
+          },
+          "popularity": {
+            "type": "string",
+            "example": 3
+          },
+          "shedding_category": {
+            "type": "string",
+            "example": "Musiman"
+          },
+          "shedding_value": {
+            "type": "number",
+            "example": 0.6
+          },
+          "temperament": {
+            "type": "string",
+            "example": "Ramah, Cerdas, Berbakti"
+          },
+          "trainability_category": {
+            "type": "string",
+            "example": "Ingin menyenangkan"
+          },
+          "trainability_value": {
+            "type": "number",
+            "example": 1
+          }
+        },
+        "xml": {
+          "name": "DogBreed"
+        }
+      }
+    }
+  }
+}
