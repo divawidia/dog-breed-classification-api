@@ -7,8 +7,7 @@ import os
 app = Flask(__name__)
 
 SWAGGER_URL = '/api/v1/docs'  # URL for exposing Swagger UI (without trailing '/')
-# API_URL = 'http://127.0.0.1:5000/swagger.json'  # Our API url (can of course be a local resource)
-API_URL = 'https://dog-breed-classifier-api-7zz24sawna-et.a.run.app/swagger.json'
+API_URL = str(os.environ.get("APP_URL"))+'/swagger.json'
 
 # Call factory function to create our blueprint
 swaggerui_blueprint = get_swaggerui_blueprint(
@@ -17,14 +16,6 @@ swaggerui_blueprint = get_swaggerui_blueprint(
     config={  # Swagger UI config overrides
         'app_name': "Dog Breed Classifier API"
     },
-    # oauth_config={  # OAuth config. See https://github.com/swagger-api/swagger-ui#oauth2-configuration .
-    #    'clientId': "your-client-id",
-    #    'clientSecret': "your-client-secret-if-required",
-    #    'realm': "your-realms",
-    #    'appName': "your-app-name",
-    #    'scopeSeparator': " ",
-    #    'additionalQueryStringParams': {'test': "hello"}
-    # }
 )
 
 app.register_blueprint(swaggerui_blueprint)

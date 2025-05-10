@@ -23,9 +23,7 @@
   "paths": {
     "/predict": {
       "post": {
-        "tags": [
-          "Dog Breed Predict"
-        ],
+        "tags": ["Dog Breed Predict"],
         "summary": "Predict dog breed based on uploaded image using deep learning model",
         "description": "",
         "operationId": "dogBreedPredictPost",
@@ -42,9 +40,7 @@
                     "format": "binary"
                   }
                 },
-                "required": [
-                  "image"
-                ]
+                "required": ["image"]
               }
             }
           }
@@ -79,9 +75,7 @@
     },
     "/dogs": {
       "get": {
-        "tags": [
-          "Dog Breed Detail"
-        ],
+        "tags": ["Dog Breed Detail"],
         "description": "Retrieve specific dog breed detail data",
         "operationId": "dogBreedDetailGet",
         "parameters": [
